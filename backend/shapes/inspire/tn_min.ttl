@@ -1,0 +1,48 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix inspire: <http://inspire.ec.europa.eu/schemas/tn/4.0#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix app: <http://bim-gis-viewer.local/ontology#> .
+
+# INSPIRE Transport Networks Minimum Compliance Shape
+# Sprint 2B: Validates structural alignment requirements
+
+inspire:TransportMinShape
+    a sh:NodeShape ;
+    sh:targetClass inspire:RoadLink, inspire:RailwayLink, inspire:TransportLink ;
+    sh:name "INSPIRE Transport Networks Minimum Compliance" ;
+    sh:description "Validates minimum requirements for INSPIRE Transport Networks alignment" ;
+    
+    # Constraint 1: Must have rdf:type
+    sh:property [
+        sh:path rdf:type ;
+        sh:minCount 1 ;
+        sh:message "INSPIRE Transport resource must have rdf:type declaration" ;
+        sh:severity sh:Violation ;
+    ] ;
+    
+    # Constraint 2: Must have dct:conformsTo
+    sh:property [
+        sh:path dct:conformsTo ;
+        sh:minCount 1 ;
+        sh:message "INSPIRE Transport resource must declare conformance via dct:conformsTo" ;
+        sh:severity sh:Violation ;
+    ] ;
+    
+    # Constraint 3: Must have skos:exactMatch from BIM element
+    sh:property [
+        sh:path [ sh:inversePath skos:exactMatch ] ;
+        sh:minCount 1 ;
+        sh:message "INSPIRE Transport resource must be aligned to BIM element via skos:exactMatch" ;
+        sh:severity sh:Violation ;
+    ] ;
+    
+    # Constraint 4: The aligned BIM element should be of type app:BIMElement (Warning only)
+    sh:property [
+        sh:path [ sh:inversePath skos:exactMatch ] ;
+        sh:class app:BIMElement ;
+        sh:message "Aligned resource should be instance of app:BIMElement (informational)" ;
+        sh:severity sh:Warning ;
+    ] .

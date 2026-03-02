@@ -1,0 +1,8 @@
+--- START VERIFICATION RULE LOGIC ---
+[TEST] Calling build_owl with config keys: ['SEN-001']
+[LOG] Processing 1 sensors for Ontology...
+[DEBUG] Rule Found for Sensor SEN-001: {'threshold': 70.0, 'unit': 'C', 'operator': '>'}
+[DEBUG] Creating SensorConfig: http://bim-gis-viewer.local/ontology#sensorConfig_SEN-001_20260211T192428147666
+[DEBUG]   Threshold: 70.0
+[DEBUG] Total Triples before export: 83
+[DEBUG] Total SensorConfig instances: 1

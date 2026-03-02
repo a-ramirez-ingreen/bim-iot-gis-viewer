@@ -1,0 +1,18 @@
+--- START VERIFICATION REFACTOR ---
+[SETUP] Created mock IFC at mock_refactor_test.ifc with Wall GUID: 0t9iY3usX1Dw74DqgQjxj_
+[TEST] Running extract_ifc_properties (New Logic)...
+[DEBUG] Extracted IFC properties for 0t9iY3usX1Dw74DqgQjxj_: 1
+
+[RESULT] Properties for 0t9iY3usX1Dw74DqgQjxj_:
+  - IFC_ID: 0t9iY3usX1Dw74DqgQjxj_
+  - IFC_Type: IfcWall
+  - Pset_Monitoring_Sensor_ID: SEN-001
+  - Sensor_ID: SEN-001
+
+[PASS] Flattened key 'Pset_Monitoring_Sensor_ID' found!
+[PASS] Promoted 'Sensor_ID' found (Backward Compat)!
+[SUCCESS] Extraction logic verified.
+
+[TEST] Verifying Ontology Property Creation...
+[PASS] Property http://bim-gis-viewer.local/ontology#Pset_Monitoring_Sensor_ID exists in RDF graph!
+   Value: SEN-001

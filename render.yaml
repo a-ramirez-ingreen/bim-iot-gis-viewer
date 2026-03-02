@@ -1,0 +1,28 @@
+services:
+  # Backend: FastAPI Web Service
+  - type: web
+    name: bim-gis-backend
+    env: docker
+    dockerContext: backend
+    dockerfilePath: backend/Dockerfile
+    plan: free
+    region: oregon # or any other preferred region
+    envVars:
+      - key: DEFAULT_CRS
+        value: EPSG:25830
+
+  # Frontend: React Static Site
+  - type: static
+    name: bim-gis-frontend
+    env: static
+    rootDir: frontend
+    buildPath: dist
+    buildCommand: npm install && npm run build
+    plan: free
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
+    rewrites:
+      - source: /**
+        destination: /index.html

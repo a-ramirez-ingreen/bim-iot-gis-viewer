@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+ifcopenshell
+shapely
+numpy
+pyproj
+google-generativeai
+python-dotenv
+python-multipart
+pandas
+openpyxl
+rdflib

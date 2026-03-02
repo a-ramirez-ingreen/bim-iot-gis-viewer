@@ -1,0 +1,11 @@
+--- INICIO AUDITORÍA SENSOR CONFIG ---
+[AUDIT] RESULTADOS:
+1. Instancias 'SensorConfig' encontradas en el OWL: 1
+   -> URI Generada: http://bim-gis-viewer.local/ontology#sensorConfig_SEN-001_20260211T183338353480
+      Linked to ConfigRun: True (http://bim-gis-viewer.local/ontology#configRun_20260211T183338353480)
+      Configures Sensors: 0 instance(s)
+
+2. Instancias 'ConfigRun' encontradas: 1
+   -> URI ConfigRun: http://bim-gis-viewer.local/ontology#configRun_20260211T183338353480
+
+[ÉXITO] Auditoría correcta: Se creó 1 configuración solo para el sensor definido.
