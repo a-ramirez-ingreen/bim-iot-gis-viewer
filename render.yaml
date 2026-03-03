@@ -3,7 +3,7 @@ services:
   - type: web
     name: bim-gis-backend
     env: docker
-    dockerContext: backend
+    dockerContext: .
     dockerfilePath: backend/Dockerfile
     plan: free
     region: oregon
