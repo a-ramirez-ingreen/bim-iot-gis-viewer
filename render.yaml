@@ -17,7 +17,6 @@ services:
     runtime: static
     staticPublishPath: ./frontend/dist
     buildCommand: cd frontend && npm install && npm run build
-    plan: free
     headers:
       - path: /*
         name: Cache-Control
