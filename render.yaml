@@ -11,13 +11,13 @@ services:
       - key: DEFAULT_CRS
         value: EPSG:25830
 
+staticSites:
   # Frontend: React Static Site
-  - type: web
-    name: bim-gis-frontend
+  - name: bim-gis-frontend
     env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishDir: dist
+    publishDir: dist
     plan: free
     headers:
       - path: /*
