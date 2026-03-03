@@ -217,16 +217,9 @@ def extract_geometry_native_2d_parallel(file_path, entities, georef_data=None):
     if georef_data:
         print(f"[DEBUG] Map Conversion: {georef_data.get('map_conversion')}")
     
-    # Determine number of workers and chunk size
-    cpus = multiprocessing.cpu_count()
-    chunk_size = max(1, len(guids) // (cpus * 2))
-    chunks = [guids[i : i + chunk_size] for i in range(0, len(guids), chunk_size)]
-    
-    native_features = []
-    with ProcessPoolExecutor(max_workers=cpus) as executor:
-        futures = [executor.submit(process_geometry_chunk_native, file_path, chunk, georef_data) for chunk in chunks]
-        for future in as_completed(futures):
-            native_features.extend(future.result())
+    # Sequential extraction to save memory on limited environments (Render Free Tier)
+    print(f"[DEBUG] Extracting geometry sequentially for {len(guids)} entities...")
+    native_features = process_geometry_chunk_native(file_path, guids, georef_data)
     
     # Build CRS info
     crs_info = {
