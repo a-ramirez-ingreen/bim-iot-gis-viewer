@@ -198,7 +198,7 @@ const App = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post('http://localhost:8000/api/process', formData, {
+      const res = await axios.post('https://bim-gis-backend.onrender.com/api/process', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -233,7 +233,7 @@ const App = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post('http://localhost:8000/api/process/inspire-gml', formData, {
+      const res = await axios.post('https://bim-gis-backend.onrender.com/api/process/inspire-gml', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
