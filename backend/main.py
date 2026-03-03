@@ -11,19 +11,18 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-origins = [
-    "https://bim-gis-frontend.onrender.com",
-    "http://localhost:5173",
-    "http://localhost:3000",
-]
-
+# Permissive CORS for troubleshooting (Credentials=False allows origins="*")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+async def root():
+    return {"status": "alive", "service": "bim-gis-backend"}
 
 class FeatureRequest(BaseModel):
     selected_files: List[str] = []
@@ -53,14 +52,18 @@ async def process_model(
     4. Transform to target CRS (EPSG:4326)
     5. Generate GeoJSON + OWL (with CRS metadata)
     """
+    print(f"[PROCESS] Starting processing for file: {file_ifc.filename}")
     # 1. Save IFC to Temp
     suffix = os.path.splitext(file_ifc.filename)[1]
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
         shutil.copyfileobj(file_ifc.file, tmp)
         tmp_path = tmp.name
+    
+    print(f"[PROCESS] IFC saved to tmp: {tmp_path}")
 
     try:
         # 2. Load Model
+        print("[PROCESS] Loading IFC model...")
         model = bim_gis.load_ifc(tmp_path)
         if not model:
             raise HTTPException(status_code=400, detail="Could not load IFC file")
