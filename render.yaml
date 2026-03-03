@@ -6,18 +6,18 @@ services:
     dockerContext: backend
     dockerfilePath: backend/Dockerfile
     plan: free
-    region: oregon # or any other preferred region
+    region: oregon
     envVars:
       - key: DEFAULT_CRS
         value: EPSG:25830
 
   # Frontend: React Static Site
-  - type: static
+  - type: web
     name: bim-gis-frontend
     env: static
     rootDir: frontend
-    buildPath: dist
     buildCommand: npm install && npm run build
+    staticPublishDir: dist
     plan: free
     headers:
       - path: /*
